@@ -2,10 +2,9 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 import os
 
-input_directory = "./train/y"
+input_directory = "./validation/Y"
 output_directory = "./previewY"
 
-# Create an ImageDataGenerator
 datagen = ImageDataGenerator(
     rotation_range=40,
     width_shift_range=0.2,
@@ -21,7 +20,6 @@ file_list = os.listdir(input_directory)
 
 for filename in file_list:
     if filename.endswith(".jpg") or filename.endswith(".jpeg") or filename.endswith(".png"):
-        # Load the image
         img = load_img(os.path.join(input_directory, filename))
 
         x = img_to_array(img)
@@ -34,5 +32,5 @@ for filename in file_list:
                                   save_prefix=os.path.splitext(filename)[0],
                                   save_format='jpeg'):
             i += 1
-            if i > 20:
+            if i > 24:
                 break
