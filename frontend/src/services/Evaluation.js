@@ -14,9 +14,11 @@ export const postImage = async (file) => {
     try{
         const response = await axios.post('http://localhost:5001/',file)
         console.log('Server response:', response.data);
+        return response
     }
     catch(error) {
         console.log('ERROR:', error)
+        return error
     } 
 }
 

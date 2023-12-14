@@ -7,6 +7,7 @@ const App = () => {
 
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
+  const [serverResponse, setServerResponse ] = useState('');
 
   const encodeImageTo64 = (element) => {
     console.log(element)
@@ -21,7 +22,7 @@ const App = () => {
     }
     reader.readAsDataURL(targetFile);
   }
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
     const postBody = {
@@ -29,7 +30,9 @@ const App = () => {
       fileName: fileName
     }
     console.log(postBody)
-    postImage(postBody);
+    const response = await postImage(postBody);
+    console.log(response)
+    setServerResponse(response.data.message)
   }
   
   return (
@@ -38,8 +41,10 @@ const App = () => {
       <h4>
         Upload new file
       </h4>
-      <input type="file" name="file" onChange={encodeImageTo64}></input>
+      <input type="file" name="file" onChange={encodeImageTo64} ></input>
       <input type="submit" name="Upload"></input>
+      <br></br>
+      <>{serverResponse}</>
     </form>
     </div>
   );

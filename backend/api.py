@@ -71,22 +71,7 @@ def uploaded_file(filename):
     myModel = app.config['MODEL']
     result = myModel.predict(test_image)
     image_src = "./" + UPLOAD_FOLDER + "/" + filename
-
-
-    if(result < 0.5):
-        print("WE HAVE A RESULT")
-        response_data = {
-        'result': result,
-        'image_src': image_src,
-        }
-        return result
-    else:
-        print("WHAT IS THIS")
-        response_data = {
-        'result': result,
-        'image_src': image_src,
-        }
-        return result
+    return result
 
 def main():
     (myModel) = load_model_from_file()
